@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "556879600304",
+    "project_id": "mamiethon-76438",
+    "storage_bucket": "mamiethon-76438.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556879600304:android:3dc185aab3bc57f809b975",
+        "android_client_info": {
+          "package_name": "com.example.mamiethon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556879600304-rlb8v8t6qb3i7k8rpqjdhnia6tfhhr7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrwYYKSEejV5axtSsSeI5s99VRCs5TIdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556879600304-rlb8v8t6qb3i7k8rpqjdhnia6tfhhr7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

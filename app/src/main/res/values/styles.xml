@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MediumTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">33dp</item>
+        <item name="android:textColor">@color/design_default_color_on_secondary</item>
+    </style>
+</resources>
