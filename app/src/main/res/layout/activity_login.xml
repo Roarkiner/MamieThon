@@ -7,22 +7,69 @@
     android:baselineAligned="false"
     android:gravity="center_vertical"
     android:paddingHorizontal="40dp"
-    tools:context=".LoginActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        style="@style/MediumTitle"/>
-    <EditText
-        android:id="@+id/email"
-        android:layout_height="wrap_content"
+    tools:context=".activity.LoginActivity">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:inputType="text"/>
-    <TextView
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Welcome"
+            style="@style/LargeTitle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Login to your account"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            style="@style/MediumTitle"/>
+        <EditText
+            android:id="@+id/login"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="textEmailAddress"
+            style="@style/TextInput"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            style="@style/MediumTitle"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
+            style="@style/TextInput"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
-        style="@style/MediumTitle"/>
+        android:layout_gravity="center_horizontal"
+        android:text="Login"
+        android:textSize="24dp"
+        android:layout_marginTop="50dp"/>
 
+    <TextView
+        android:id="@+id/registerLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account? Register Instead"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        style="@style/Link"/>
 </LinearLayout>
