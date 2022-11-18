@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.mamiethon.interfaces.IAuthenticator
 import com.example.mamiethon.R
@@ -14,8 +15,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if(authenticator.checkIfUserIsConnected())
+        if(!authenticator.checkIfUserIsConnected())
             setContentView(R.layout.activity_login)
         else{
             switchToRecipeListActivity()
@@ -23,12 +23,23 @@ class LoginActivity : AppCompatActivity() {
 
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
-            switchToRecipeListActivity()
+            tryToConnectUser()
         }
 
         val registerLink = findViewById<TextView>(R.id.registerLink)
         registerLink.setOnClickListener {
             switchToRegisterActivity()
+        }
+    }
+
+    private fun tryToConnectUser(){
+        var email = findViewById<EditText>(R.id.emailAddress).text.toString()
+        var password = findViewById<EditText>(R.id.password).text.toString()
+        authenticator.connectUserWithEmailAndPassword(email, password, this) {
+            success ->
+                if(success == true){
+                    switchToRecipeListActivity()
+                }
         }
     }
 
