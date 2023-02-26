@@ -17,13 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Welcome"
+            android:text="Bienvenue"
             style="@style/LargeTitle"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Login to your account"
+            android:textColor="@color/black"
+            android:text="Connectez-vous à votre compte"
             />
     </LinearLayout>
 
@@ -45,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="Mot de passe"
             style="@style/MediumTitle"/>
         <EditText
             android:id="@+id/password"
@@ -60,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Login"
+        android:text="Connexion"
         android:textSize="24dp"
         android:layout_marginTop="50dp"/>
 
@@ -68,7 +69,7 @@
         android:id="@+id/registerLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Register Instead"
+        android:text="Pas encore de compte? Créez en un"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         style="@style/Link"/>

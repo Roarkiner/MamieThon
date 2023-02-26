@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MamieThon</string>
+    <string name="nav_fav_page">Favoris</string>
+    <string name="nav_search_page">Rechercher</string>
+    <string name="searchbar_hint">Rechercher une recette</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_profile_page">Mon compte</string>
 </resources>

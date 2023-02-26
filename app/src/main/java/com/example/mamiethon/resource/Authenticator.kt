@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.mamiethon.activity.LoginActivity
 import com.example.mamiethon.interfaces.IAuthenticator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -24,24 +25,59 @@ class Authenticator : IAuthenticator {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(context) { task ->
                 if (task.isSuccessful) {
-                    val user = auth.currentUser
                     completion(true)
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(context, "Authentication failed.",
+                    Toast.makeText(context, "Identifiant ou mot de passe incorrects.",
                         Toast.LENGTH_SHORT).show()
                     completion(null)
                 }
             }
     }
 
-    override fun createUserWithEmailAndPassword(email: String, password: String, context: AppCompatActivity, completion: (user: FirebaseUser?) -> Unit) {
-        TODO("Not yet implemented")
+    override fun createUserWithEmailAndPassword(email: String, password: String, confirmPassword: String, context: AppCompatActivity, completion: (success: Boolean?) -> Unit) {
+        if (password != confirmPassword) {
+            Toast.makeText(context, "Le mot de passe et la confirmation du mot de passe doivent être identiques.", Toast.LENGTH_SHORT).show()
+        } else {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(context) { task ->
+                    if (task.isSuccessful) {
+                        completion(true)
+                    } else {
+                        val error = task.exception
+                        if(error is FirebaseAuthException && error.errorCode == "ERROR_WEAK_PASSWORD"){
+                            Toast.makeText(
+                                context, "Le mot de passe n'est pas assez sécurisé.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else if(error is FirebaseAuthException && error.errorCode == "ERROR_INVALID_EMAIL"){
+                            Toast.makeText(
+                                context, "L'email est incorrect.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else if(error is FirebaseAuthException && error.errorCode == "ERROR_EMAIL_ALREADY_IN_USE"){
+                            Toast.makeText(
+                                context, "Le compte existe déjà.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                context, "Une erreur est survenue lors de la création du compte.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        completion(null)
+                    }
+                }
+        }
     }
 
     override fun getCurrentUser(): FirebaseUser?
     {
-        TODO("Not yet implemented")
+        return Firebase.auth.currentUser
     }
 
+    override fun logoutUser() {
+        auth.signOut()
+    }
 }
