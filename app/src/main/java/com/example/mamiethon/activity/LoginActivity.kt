@@ -15,20 +15,20 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(!authenticator.checkIfUserIsConnected())
+        if(!authenticator.checkIfUserIsConnected()) {
             setContentView(R.layout.activity_login)
-        else{
-            switchToRecipeListActivity()
-        }
 
-        val loginButton = findViewById<Button>(R.id.loginButton)
-        loginButton.setOnClickListener {
-            tryToConnectUser()
-        }
+            val loginButton = findViewById<Button>(R.id.loginButton)
+            loginButton.setOnClickListener {
+                tryToConnectUser()
+            }
 
-        val registerLink = findViewById<TextView>(R.id.registerLink)
-        registerLink.setOnClickListener {
-            switchToRegisterActivity()
+            val registerLink = findViewById<TextView>(R.id.registerLink)
+            registerLink.setOnClickListener {
+                switchToRegisterActivity()
+            }
+        } else {
+            switchToMainActivity()
         }
     }
 
@@ -38,13 +38,13 @@ class LoginActivity : AppCompatActivity() {
         authenticator.connectUserWithEmailAndPassword(email, password, this) {
             success ->
                 if(success == true){
-                    switchToRecipeListActivity()
+                    switchToMainActivity()
                 }
         }
     }
 
-    private fun switchToRecipeListActivity(){
-        val switchActivityIntent = Intent(this, RecipeListActivity::class.java)
+    private fun switchToMainActivity(){
+        val switchActivityIntent = Intent(this, MainActivity::class.java)
         startActivity(switchActivityIntent)
     }
 

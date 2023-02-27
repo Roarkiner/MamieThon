@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.mamiethon.interfaces.IAuthenticator
 import com.example.mamiethon.R
@@ -14,30 +15,41 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(authenticator.checkIfUserIsConnected())
-            setContentView(R.layout.activity_login)
-        else{
-            switchToRecipeListActivity()
-        }
+        if(!authenticator.checkIfUserIsConnected()){
+            setContentView(R.layout.activity_register)
 
-        val loginButton = findViewById<Button>(R.id.loginButton)
-        loginButton.setOnClickListener {
-            switchToRecipeListActivity()
-        }
+            val registerButton = findViewById<Button>(R.id.createAccountButton)
+            registerButton.setOnClickListener {
+                tryToRegisterUser()
+            }
 
-        val registerLink = findViewById<TextView>(R.id.registerLink)
-        registerLink.setOnClickListener {
-            switchToRegisterActivity()
+            val registerLink = findViewById<TextView>(R.id.registerLink)
+            registerLink.setOnClickListener {
+                switchToLoginActivity()
+            }
+        } else {
+            switchToMainActivity()
         }
     }
 
-    private fun switchToRecipeListActivity(){
-        val switchActivityIntent = Intent(this, RecipeListActivity::class.java)
+    private fun tryToRegisterUser(){
+        var email = findViewById<EditText>(R.id.emailAddress).text.toString()
+        var password = findViewById<EditText>(R.id.password).text.toString()
+        var confirmPassword = findViewById<EditText>(R.id.confirmPassword).text.toString()
+        authenticator.createUserWithEmailAndPassword(email, password, confirmPassword, this) { success ->
+            if(success == true){
+                switchToMainActivity()
+            }
+        }
+    }
+
+    private fun switchToMainActivity(){
+        val switchActivityIntent = Intent(this, MainActivity::class.java)
         startActivity(switchActivityIntent)
     }
 
-    private fun switchToRegisterActivity() {
-        val switchActivityIntent = Intent(this, RegisterActivity::class.java)
+    private fun switchToLoginActivity() {
+        val switchActivityIntent = Intent(this, LoginActivity::class.java)
         startActivity(switchActivityIntent)
     }
 }
