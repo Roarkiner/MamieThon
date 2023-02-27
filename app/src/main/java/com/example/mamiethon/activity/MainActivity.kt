@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.ViewModelFactoryDsl
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.mamiethon.R
 import com.example.mamiethon.factory.MainViewModelFactory
-import com.example.mamiethon.viewmodel.MainViewModel
+import com.example.mamiethon.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

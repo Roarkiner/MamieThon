@@ -1,13 +1,9 @@
-package com.example.mamiethon.viewmodel
+package com.example.mamiethon.viewModel
 
 import android.app.Activity
 import android.content.Intent
-import android.text.Spannable.Factory
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.mamiethon.activity.LoginActivity
 import com.example.mamiethon.interfaces.IAuthenticator
 import com.example.mamiethon.resource.Authenticator

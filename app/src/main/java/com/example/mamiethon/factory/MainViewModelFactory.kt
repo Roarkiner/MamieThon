@@ -1,10 +1,9 @@
 package com.example.mamiethon.factory
 
 import android.app.Activity
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mamiethon.viewmodel.MainViewModel
+import com.example.mamiethon.viewModel.MainViewModel
 
 class MainViewModelFactory(private val parentActivity: Activity) : ViewModelProvider.Factory {
 

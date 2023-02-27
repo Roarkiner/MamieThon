@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.mamiethon.R
 import com.example.mamiethon.factory.MainViewModelFactory
 import com.example.mamiethon.interfaces.IAuthenticator
 import com.example.mamiethon.resource.Authenticator
-import com.example.mamiethon.viewmodel.MainViewModel
+import com.example.mamiethon.viewModel.MainViewModel
 
 class ProfileFragment : Fragment() {
     private val authenticator: IAuthenticator = Authenticator()
@@ -39,6 +39,10 @@ class ProfileFragment : Fragment() {
         disconnectButton.setOnClickListener{
             viewModel.disconnectAndClearActivity()
         }
+        val textView = view.findViewById<TextView>(R.id.user_email)
+        val user = authenticator.getCurrentUser()
+        if(user != null)
+            textView.text = user.email
         return view
     }
 }

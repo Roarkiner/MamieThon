@@ -1,17 +1,13 @@
 package com.example.mamiethon.resource
 
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mamiethon.activity.LoginActivity
 import com.example.mamiethon.interfaces.IAuthenticator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.tasks.await
 
 class Authenticator : IAuthenticator {
     private var auth: FirebaseAuth = Firebase.auth
