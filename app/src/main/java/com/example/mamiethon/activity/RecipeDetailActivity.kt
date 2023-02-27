@@ -17,6 +17,7 @@ import com.example.mamiethon.adapter.SimilarRecipeListAdapter
 import com.example.mamiethon.data.SimilarRecipe
 import com.example.mamiethon.interfaces.ISimilarRecipeListClickListener
 import com.example.mamiethon.viewModel.RecipeDetailViewModel
+import com.google.android.material.button.MaterialButton
 import com.squareup.picasso.Picasso
 
 class RecipeDetailActivity : AppCompatActivity() {
@@ -45,6 +46,18 @@ class RecipeDetailActivity : AppCompatActivity() {
         val recipeInstructionsView = findViewById<TextView>(R.id.recipe_instructions)
         val recipeDescriptionView = findViewById<TextView>(R.id.recipe_description)
         val ingredientListAdapter = IngredientListAdapter()
+
+        val shareButton = findViewById<MaterialButton>(R.id.shareButton)
+        shareButton.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/html"
+            val shareRecipeTitle = recipeDetailViewModel.recipe.value?.title ?: ""
+            val shareRecipeDescription = recipeDetailViewModel.recipe.value?.description ?: ""
+            val htmlShareText = "<h2>$shareRecipeTitle</h2>$shareRecipeDescription";
+            val htmlFormattedShareText = HtmlCompat.fromHtml(htmlShareText, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, htmlFormattedShareText)
+            startActivity(Intent.createChooser(shareIntent, "Partager avec"))
+        }
 
         recipeDetailViewModel.recipe.observe(this, Observer {
             recipeTitleView.text = it.title
