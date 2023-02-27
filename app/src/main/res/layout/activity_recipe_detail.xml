@@ -122,10 +122,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/SmallTitle"
+            android:layout_marginTop="16dp"
             android:text="Instructions : "/>
 
         <TextView
             android:id="@+id/recipe_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Recipe description -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SmallTitle"
+            android:layout_marginTop="16dp"
+            android:text="Description : "/>
+
+        <TextView
+            android:id="@+id/recipe_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -137,6 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/SmallTitle"
+            android:layout_marginTop="16dp"
             android:text="Recettes similaires : "/>
 
         <RelativeLayout

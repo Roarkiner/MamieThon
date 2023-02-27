@@ -13,6 +13,8 @@ data class RecipeDetail(
     @SerializedName("extendedIngredients")
     val ingredients: List<Ingredient>,
     val instructions: String,
+    @SerializedName("summary")
+    val description: String,
     val vegetarian: Boolean,
     val vegan: Boolean
 )

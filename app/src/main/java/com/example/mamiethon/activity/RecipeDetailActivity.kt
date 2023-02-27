@@ -43,6 +43,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         val recipeVegetarianImageView = findViewById<ImageView>(R.id.recipe_vegetarian_image)
         val recipeVeganImageView = findViewById<ImageView>(R.id.recipe_vegan_image)
         val recipeInstructionsView = findViewById<TextView>(R.id.recipe_instructions)
+        val recipeDescriptionView = findViewById<TextView>(R.id.recipe_description)
         val ingredientListAdapter = IngredientListAdapter()
 
         recipeDetailViewModel.recipe.observe(this, Observer {
@@ -68,6 +69,9 @@ class RecipeDetailActivity : AppCompatActivity() {
 
             val htmlFormattedInstructions = HtmlCompat.fromHtml(it.instructions, HtmlCompat.FROM_HTML_MODE_COMPACT)
             recipeInstructionsView.text = htmlFormattedInstructions
+
+            val htmlFormattedDescription = HtmlCompat.fromHtml(it.description, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            recipeDescriptionView.text = htmlFormattedDescription
         })
 
         val similarRecipeRecyclerView = findViewById<RecyclerView>(R.id.recipe_similar_recipes)
