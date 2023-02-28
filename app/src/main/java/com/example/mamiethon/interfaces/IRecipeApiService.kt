@@ -28,4 +28,10 @@ interface IRecipeApiService {
         @Query("number") number: Int,
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ) : retrofit2.Response<List<SimilarRecipe>>
+
+    @GET("/recipes/informationBulk")
+    suspend fun FetchRecipesByIds(
+        @Query("ids") commaSeparatedRecipeIds: String,
+        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+    ) : retrofit2.Response<LightRecipesApiResult>
 }

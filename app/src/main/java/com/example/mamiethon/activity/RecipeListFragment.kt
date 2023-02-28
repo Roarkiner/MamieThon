@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,13 +22,14 @@ class RecipeListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        recipeListViewModel = ViewModelProvider(requireActivity())[RecipeListViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_recipe_list, container, false)
-        recipeListViewModel = ViewModelProvider(requireActivity())[RecipeListViewModel::class.java]
 
         val recipeListAdapter = RecipeListAdapter(object : IRecipeListClickListener {
             override fun onRecipeClick(recipe: LightRecipe) {
@@ -48,7 +48,7 @@ class RecipeListFragment : Fragment() {
 
         view.findViewById<SearchView>(R.id.search_view).setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                recipeListViewModel.SearchRecipesByQuery(query, 20)
+                recipeListViewModel.searchRecipesByQuery(query, 20)
                 return true
             }
 

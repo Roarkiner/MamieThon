@@ -19,10 +19,6 @@ class ProfileFragment : Fragment() {
     private val authenticator: IAuthenticator = Authenticator()
     private lateinit var viewModel: MainViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         viewModel = ViewModelProvider(

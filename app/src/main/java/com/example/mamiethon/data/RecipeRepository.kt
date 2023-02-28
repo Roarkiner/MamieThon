@@ -5,16 +5,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RecipeRepository {
-    private val BASE_URL = "https://api.spoonacular.com/"
+    private val baseUrl = "https://api.spoonacular.com/"
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     private val recipeApiService = retrofit.create(IRecipeApiService::class.java)
 
-    suspend fun SearchRecipesByQuery(query: String, number: Int): List<LightRecipe>? {
+    suspend fun searchRecipesByQuery(query: String, number: Int): List<LightRecipe>? {
         val response = recipeApiService.FetchRecipesByQuery(query, number)
         return if(response.isSuccessful && response.body() != null) {
             val lightRecipesApiResult = response.body()!!
@@ -24,7 +24,7 @@ class RecipeRepository {
         }
     }
 
-    suspend fun SearchRecipeById(recipeId: Int): RecipeDetail? {
+    suspend fun searchRecipeById(recipeId: Int): RecipeDetail? {
         val response = recipeApiService.FetchRecipeById(recipeId)
         return if(response.isSuccessful && response.body() != null) {
             val recipeDetailApiResult = response.body()!!
@@ -34,11 +34,26 @@ class RecipeRepository {
         }
     }
 
-    suspend fun SearchSimilarRecipes(recipeId: Int, numberOfSimilarRecipes: Int): List<SimilarRecipe>? {
+    suspend fun searchSimilarRecipes(recipeId: Int, numberOfSimilarRecipes: Int): List<SimilarRecipe>? {
         val response = recipeApiService.FetchSimilarRecipes(recipeId, numberOfSimilarRecipes)
         return if(response.isSuccessful && response.body() != null) {
             val similarRecipesListApiResult = response.body()!!
             similarRecipesListApiResult
+        } else {
+            null
+        }
+    }
+
+    suspend fun searchRecipesByIds(recipeIdsList: List<String>) : List<LightRecipe>?{
+        val commaSeparatedRecipeIds = recipeIdsList.joinToString(separator = ",")
+        val response = recipeApiService.FetchRecipesByIds(commaSeparatedRecipeIds)
+        return if(response.isSuccessful) {
+            if(response.body() != null) {
+                val lightRecipesApiResult = response.body()!!
+                lightRecipesApiResult.recipes
+            } else {
+                emptyList()
+            }
         } else {
             null
         }

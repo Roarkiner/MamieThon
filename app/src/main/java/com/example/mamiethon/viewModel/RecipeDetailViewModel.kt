@@ -33,15 +33,15 @@ class RecipeDetailViewModel(application: Application) : AndroidViewModel(applica
     val similarRecipes: LiveData<List<SimilarRecipe>>
         get() = _similarRecipes
 
-    fun SearchRecipeDetail() {
-        SearchRecipeById()
-        SearchSimilarRecipes()
+    fun searchRecipeDetail() {
+        searchRecipeById()
+        searchSimilarRecipes()
     }
 
-    private fun SearchRecipeById() {
+    private fun searchRecipeById() {
         viewModelScope.launch {
             try {
-                val result = recipeRepository.SearchRecipeById(_recipeId.value!!)
+                val result = recipeRepository.searchRecipeById(_recipeId.value!!)
                 if (result != null) {
                     _recipe.value = result!!
                 } else {
@@ -58,10 +58,10 @@ class RecipeDetailViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    private fun SearchSimilarRecipes() {
+    private fun searchSimilarRecipes() {
         viewModelScope.launch {
             try {
-                val result = recipeRepository.SearchSimilarRecipes(_recipeId.value!!, 3)
+                val result = recipeRepository.searchSimilarRecipes(_recipeId.value!!, 3)
                 if (result != null ) {
                     _similarRecipes.value = result!!
                 } else {

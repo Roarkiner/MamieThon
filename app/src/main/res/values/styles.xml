@@ -2,16 +2,20 @@
 <resources>
     <style name="LargeTitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="MediumTitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="SmallTitle" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="TextInput" parent="TextAppearance.AppCompat">
         <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
     <style name="Link" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/blue</item>

@@ -18,10 +18,10 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
     val recipes: LiveData<List<LightRecipe>>
         get() = _recipes
 
-    fun SearchRecipesByQuery(query: String, number: Int) {
+    fun searchRecipesByQuery(query: String, number: Int) {
         viewModelScope.launch {
             try {
-                val result = recipeRepository.SearchRecipesByQuery(query, number)
+                val result = recipeRepository.searchRecipesByQuery(query, number)
                 if (result != null) {
                     _recipes.value = result!!
                     if (recipes.value!!.isEmpty()) {

@@ -3,14 +3,11 @@ package com.example.mamiethon.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mamiethon.R
 import com.example.mamiethon.data.SimilarRecipe
-import com.example.mamiethon.interfaces.IRecipeListClickListener
 import com.example.mamiethon.interfaces.ISimilarRecipeListClickListener
-import com.squareup.picasso.Picasso
 
 class SimilarRecipeListAdapter(private val listener: ISimilarRecipeListClickListener) : RecyclerView.Adapter<SimilarRecipeListAdapter.SimilarRecipeListViewHolder>() {
 

@@ -18,8 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:queryHint="Search recipes"
-            android:backgroundTint="@color/light_gray"
-            android:iconifiedByDefault="false"/>
+            android:background="@color/lighter_gray"
+            android:iconifiedByDefault="false"
+            android:searchIcon="@drawable/ic_search"
+            app:theme="@style/SearchViewWidgetTheme"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipe_list_recycler_view"

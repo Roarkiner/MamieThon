@@ -33,7 +33,7 @@
             android:layout_gravity="bottom|center_horizontal"
             android:backgroundTint="@color/gray"
             android:text="Déconnexion"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/lighter_gray"
             android:textSize="24sp" />
     </LinearLayout>
 </FrameLayout>

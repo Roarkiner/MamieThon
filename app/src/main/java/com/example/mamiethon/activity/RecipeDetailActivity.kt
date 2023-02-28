@@ -110,6 +110,6 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
         })
 
-        recipeDetailViewModel.SearchRecipeDetail()
+        recipeDetailViewModel.searchRecipeDetail()
     }
 }
