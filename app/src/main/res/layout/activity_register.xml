@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:baselineAligned="false"
     android:gravity="center_vertical"
+    android:background="@color/lighter_gray"
     android:paddingHorizontal="40dp"
     tools:context=".activity.RegisterActivity">
     <LinearLayout

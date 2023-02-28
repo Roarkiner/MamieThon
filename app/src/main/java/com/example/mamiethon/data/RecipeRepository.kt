@@ -15,7 +15,7 @@ class RecipeRepository {
     private val recipeApiService = retrofit.create(IRecipeApiService::class.java)
 
     suspend fun searchRecipesByQuery(query: String, number: Int): List<LightRecipe>? {
-        val response = recipeApiService.FetchRecipesByQuery(query, number)
+        val response = recipeApiService.fetchRecipesByQuery(query, number)
         return if(response.isSuccessful && response.body() != null) {
             val lightRecipesApiResult = response.body()!!
             lightRecipesApiResult.recipes
@@ -25,7 +25,7 @@ class RecipeRepository {
     }
 
     suspend fun searchRecipeById(recipeId: Int): RecipeDetail? {
-        val response = recipeApiService.FetchRecipeById(recipeId)
+        val response = recipeApiService.fetchRecipeById(recipeId)
         return if(response.isSuccessful && response.body() != null) {
             val recipeDetailApiResult = response.body()!!
             recipeDetailApiResult
@@ -35,7 +35,7 @@ class RecipeRepository {
     }
 
     suspend fun searchSimilarRecipes(recipeId: Int, numberOfSimilarRecipes: Int): List<SimilarRecipe>? {
-        val response = recipeApiService.FetchSimilarRecipes(recipeId, numberOfSimilarRecipes)
+        val response = recipeApiService.fetchSimilarRecipes(recipeId, numberOfSimilarRecipes)
         return if(response.isSuccessful && response.body() != null) {
             val similarRecipesListApiResult = response.body()!!
             similarRecipesListApiResult
@@ -46,11 +46,11 @@ class RecipeRepository {
 
     suspend fun searchRecipesByIds(recipeIdsList: List<String>) : List<LightRecipe>?{
         val commaSeparatedRecipeIds = recipeIdsList.joinToString(separator = ",")
-        val response = recipeApiService.FetchRecipesByIds(commaSeparatedRecipeIds)
+        val response = recipeApiService.fetchRecipesByIds(commaSeparatedRecipeIds)
         return if(response.isSuccessful) {
             if(response.body() != null) {
-                val lightRecipesApiResult = response.body()!!
-                lightRecipesApiResult.recipes
+                val lightRecipesList = response.body()!!
+                lightRecipesList
             } else {
                 emptyList()
             }

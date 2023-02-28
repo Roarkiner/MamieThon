@@ -46,6 +46,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun switchToMainActivity(){
         val switchActivityIntent = Intent(this, MainActivity::class.java)
         startActivity(switchActivityIntent)
+        finish()
     }
 
     private fun switchToLoginActivity() {

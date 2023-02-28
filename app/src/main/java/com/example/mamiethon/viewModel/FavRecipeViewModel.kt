@@ -1,6 +1,7 @@
 package com.example.mamiethon.viewModel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -24,7 +25,7 @@ class FavRecipeViewModel(application: Application) : AndroidViewModel(applicatio
     val favRecipes: LiveData<List<LightRecipe>>
         get() = _favRecipes
 
-    fun GetFavoriteRecipes() {
+    fun getFavoriteRecipes() {
         val fireBaseUser = authenticator.getCurrentUser()
         if(fireBaseUser != null) {
             val userUid = fireBaseUser.uid

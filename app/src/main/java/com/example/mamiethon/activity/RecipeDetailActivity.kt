@@ -1,10 +1,12 @@
 package com.example.mamiethon.activity
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +19,7 @@ import com.example.mamiethon.adapter.SimilarRecipeListAdapter
 import com.example.mamiethon.data.SimilarRecipe
 import com.example.mamiethon.interfaces.ISimilarRecipeListClickListener
 import com.example.mamiethon.viewModel.RecipeDetailViewModel
-import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 class RecipeDetailActivity : AppCompatActivity() {
@@ -31,6 +33,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         val recipeId = intent.getIntExtra("recipeId", -1)
         recipeDetailViewModel = ViewModelProvider(this)[RecipeDetailViewModel::class.java]
         recipeDetailViewModel.setRecipeId(recipeId)
+        recipeDetailViewModel.searchRecipeDetail()
 
         recipeDetailViewModel.terminateActivity.observe(this, Observer {
             if (it)
@@ -47,16 +50,24 @@ class RecipeDetailActivity : AppCompatActivity() {
         val recipeDescriptionView = findViewById<TextView>(R.id.recipe_description)
         val ingredientListAdapter = IngredientListAdapter()
 
-        val shareButton = findViewById<MaterialButton>(R.id.shareButton)
+        val favButton = findViewById<FloatingActionButton>(R.id.favButton)
+        favButton.setOnClickListener {
+            recipeDetailViewModel.saveFavoriteEnabledValue()
+        }
+
+        recipeDetailViewModel.isFav.observe(this, Observer {
+            if(recipeDetailViewModel.isFav.value!!){
+                favButton.setImageResource(R.drawable.ic_fav_filled)
+                favButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.red))
+            } else {
+                favButton.setImageResource(R.drawable.ic_fav)
+                favButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.light_gray))
+            }
+        })
+
+        val shareButton = findViewById<FloatingActionButton>(R.id.shareButton)
         shareButton.setOnClickListener {
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.type = "text/html"
-            val shareRecipeTitle = recipeDetailViewModel.recipe.value?.title ?: ""
-            val shareRecipeDescription = recipeDetailViewModel.recipe.value?.description ?: ""
-            val htmlShareText = "<h2>$shareRecipeTitle</h2>$shareRecipeDescription";
-            val htmlFormattedShareText = HtmlCompat.fromHtml(htmlShareText, HtmlCompat.FROM_HTML_MODE_COMPACT)
-            shareIntent.putExtra(Intent.EXTRA_TEXT, htmlFormattedShareText)
-            startActivity(Intent.createChooser(shareIntent, "Partager avec"))
+            startActivity(Intent.createChooser(recipeDetailViewModel.startShareActivity(), "Partager avec"))
         }
 
         recipeDetailViewModel.recipe.observe(this, Observer {
@@ -88,7 +99,6 @@ class RecipeDetailActivity : AppCompatActivity() {
         })
 
         val similarRecipeRecyclerView = findViewById<RecyclerView>(R.id.recipe_similar_recipes)
-        val noSimilarRecipeTextView = findViewById<TextView>(R.id.no_similar_recipes)
         val similarRecipeListAdapter = SimilarRecipeListAdapter(object : ISimilarRecipeListClickListener {
             override fun onSimilarRecipeClick(similarRecipe: SimilarRecipe) {
                 val intent = Intent(this@RecipeDetailActivity, RecipeDetailActivity::class.java)
@@ -98,18 +108,5 @@ class RecipeDetailActivity : AppCompatActivity() {
         })
         similarRecipeRecyclerView.adapter = similarRecipeListAdapter
         similarRecipeRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-
-        recipeDetailViewModel.similarRecipes.observe(this, Observer {
-            if(it.isEmpty()){
-                similarRecipeRecyclerView.visibility = RecyclerView.GONE
-                noSimilarRecipeTextView.visibility = TextView.VISIBLE
-            } else {
-                noSimilarRecipeTextView.visibility = TextView.GONE
-                similarRecipeRecyclerView.visibility = RecyclerView.VISIBLE
-                similarRecipeListAdapter.setSimilarRecipes(it)
-            }
-        })
-
-        recipeDetailViewModel.searchRecipeDetail()
     }
 }
